@@ -1,42 +1,30 @@
-# 로또번호를 구하는 간단한 프로젝트
-# 조건 1 : 지난 회차의 값이 중복되면 안됀다
-# 조건 2 : 로또 값이 연속된 숫자면 안됀다 ex (2,3)
-
-import random
+import os
+import Lotto_function
 
 
-class Lotto:
+class Intro:
 
     def __init__(self):
-        self.L_result = 0  # 지난 당첨회차번호 저장
-        self.P_result = 0  # 난수값 저장
+        print("#" * 50)
+        print("{0:^45}".format("로또번호 생성기"))
+        print("#" * 50)
+        print("\n")
+        print("{0:^45}".format("[1.로또번호 생성 2.기록 보기 3.종료]"))
 
-    def Last_Lotto_Num(self):
-        self.L_result = list(input("지난 당첨회차 로또번호 입력: "))
-        while " " in self.L_result:  # 리스트 안에 공백삭제
-            self.L_result.remove(" ")
-        self.L_result = list(map(int, self.L_result))  # 리스트안의 문자열을 정수로 바꿈
-
-    def Random_value(self):
-        save_num = []  # 로또값 저장을 위한 리스트
-        while len(save_num) != 6:
-            self.P_result = random.randint(1, 45)
-            if self.P_result in self.L_result:  # 지난회차의 수와 중복될시 값을 다시 받음
-                continue
-            elif self.P_result - 1 in save_num or self.P_result + 1 in save_num:  # 연속된수 불가
-                continue
-            elif self.P_result in save_num:  # 로또번호가 중복이 안돼게 하기
-                continue
-            else:
-                save_num.append(self.P_result)
-        save_num.sort()
-        return save_num
+    # noinspection PyMethodMayBeStatic
+    def input_num(self, num):
+        if num == 1:
+            os.system("cls")
+        elif num == 2:
+            return
+        else:
+            os.system(0)
 
 
-l_lotto = 0
-p_lotto = 0
-lotto = Lotto()
-lotto.Last_Lotto_Num()
-p_lotto = lotto.Random_value()
-print("행운의 번호 : ")
-print(p_lotto)
+i = Intro()
+num1 = int(input("메뉴 번호를 입력해주세요: "))
+i.input_num(num1)
+lo = Lotto_function.Lotto()
+lo.Last_Lotto_Num()
+num2 = lo.Random_value()
+print(num2)
