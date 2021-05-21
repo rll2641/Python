@@ -24,14 +24,14 @@ def get_target_price(ticker):
     # 하루치의 정보를 df(데이터프레임)에 저장.
     df = pyupbit.get_ohlcv(ticker, interval="day", count=1)
     # df.iloc[0][3]은 .iloc의 위치 인덱싱을 사용해 count=1(하루치의 시가,저가,종가등등)중에 저가를 뽑아준다.
-    low_price = df.iloc[0][3]
+    low_price = df.iloc[0]['low']
     # 목표매수가 설정. 저가*1.02(1.02는 저가의 +2퍼센트를 매수하기 위해 1.02를 곱해준 값을 target_price에 저장)
     target_price = low_price * 1.02
     return target_price
 
 # 현재가 조회를 위한 함수
 def get_current_price(ticker):
-    return pyupbit.get_orderbook(tickers=ticker)
+    return pyupbit.get_orderbook(tickers=ticker)[0]["orderbook_units"][0]["ask_price"]
 
 # 잔고 조회
 def get_balance(ticker):
