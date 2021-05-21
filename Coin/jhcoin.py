@@ -3,8 +3,8 @@ import datetime
 import time
 
 # 업비트의 각자 코드 입력
-access = "p4NOCVye8A8ahQ9Lh0qZ0OkOcFrDD863yaBLvqGa"         
-secret = "uBvREK2gFEOZkI2WNhHxaHhVapAYhZwiXMVDL1ZL"         
+access = "bvKAlsmKfCxd6r3BCv1WheCXKHlh4GCaRB8BSrak"         
+secret = "nENom0nvzCJAybD31mBaKXHPP9KbNPcwPixeFZz4"         
 
 # 시작시간을 위한 함수
 def get_start_time(ticker):
