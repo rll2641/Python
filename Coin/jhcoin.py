@@ -3,8 +3,8 @@ import datetime
 import time
 
 # 업비트의 각자 코드 입력
-access = "your access code"         
-secret = "your secret code"         
+access = "p4NOCVye8A8ahQ9Lh0qZ0OkOcFrDD863yaBLvqGa"         
+secret = "uBvREK2gFEOZkI2WNhHxaHhVapAYhZwiXMVDL1ZL"         
 
 # 로그인
 upbit = pyupbit.Upbit(access, secret)
@@ -76,4 +76,3 @@ while True:
     except Exception as e:
         print(e)
         time.sleep(1)
-        
