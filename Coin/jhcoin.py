@@ -9,6 +9,8 @@ secret = "uBvREK2gFEOZkI2WNhHxaHhVapAYhZwiXMVDL1ZL"
 # 로그인
 upbit = pyupbit.Upbit(access, secret)
 
+print("auto trading start!")
+
 # 시작시간을 위한 함수
 def get_start_time(ticker):
     # get_ohlcv의 2번째 매개변수로 day라는 문자열을 주게 되면 그날의 시작시간이 나오는데 그게 9시로 설정되어있다.(그냥 ticker로 넘겨주게되면 krw-btc의 값이 넘어간다)
