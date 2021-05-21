@@ -14,7 +14,7 @@ print("auto trading start!")
 # 시작시간을 위한 함수
 def get_start_time(ticker):
     # get_ohlcv의 2번째 매개변수로 day라는 문자열을 주게 되면 그날의 시작시간이 나오는데 그게 9시로 설정되어있다.(그냥 ticker로 넘겨주게되면 krw-btc의 값이 넘어간다)
-    df = pyupbit.get_ohlcv(ticker, interval="day", count=1)
+    df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
     # df의 값 중 첫번째 즉 인덱스[column]의 첫번째 index[0]의 값이 시간인데 이걸 받아와서 start_time에 저장.
     start_time = df.index[0] + datetime.timedelta(hours=6)
     return start_time
@@ -31,7 +31,7 @@ def get_target_price(ticker):
 
 # 현재가 조회를 위한 함수
 def get_current_price(ticker):
-    return pyupbit.get_orderbook(tickers=ticker)[0]["orderbook_units"][0]["ask_price"]
+    return pyupbit.get_orderbook(tickers=ticker)
 
 # 잔고 조회
 def get_balance(ticker):
