@@ -67,12 +67,15 @@ while True:
                 if my_krw > 5000:
                     # 0.9995를 곱해주는 이유는 업비트의 수수료가 0.05퍼센트이기 때문             
                     upbit.buy_market_order("KRW-BTC", my_krw*0.9995)
-        # 나머지 시간에는 sleep를 이용해 프로그램 멈춤
+            if (target_price*1.02) < current_price:
+                # 내 비트코인 잔고 저장
+                btc = get_balance("BTC")
+                # 현재 내 비트코인 잔고가 최소금액인 5000원(0.00011btc)를 넘으면 전량매도
+                if btc > 0.00011:
+                    upbit.sell_market_order("KRW-BTC", btc*0.9995)
+        # 나머지 시간 휴식
         else:
-            # 내 비트코인 잔고 저장.
-            btc = get_balance("BTC")
-            if btc > 0.00011:
-                upbit.sell_market_oder("KRW-BTC", btc*0.9995)
+            time.sleep(21600)
         time.sleep(1)
     except Exception as e:
         print(e)
