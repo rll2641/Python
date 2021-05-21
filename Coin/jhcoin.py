@@ -55,7 +55,7 @@ while True:
         # 시작시간
         start_time = get_start_time("KRW-BTC")
         # 끝나는 시간 = 시작시간(15:00) + 17시간 = 8:00
-        end_time = start_time + datetime.timedelta(hour=17)
+        end_time = start_time + datetime.timedelta(hours=17)
         
         # 시간이 15:00 ~ 현재 ~ 8:00시가 되면 자동매매를 한다.
         if start_time < now < end_time:
