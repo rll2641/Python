@@ -6,27 +6,22 @@ import time
 access = "p4NOCVye8A8ahQ9Lh0qZ0OkOcFrDD863yaBLvqGa"         
 secret = "uBvREK2gFEOZkI2WNhHxaHhVapAYhZwiXMVDL1ZL"         
 
-# 로그인
-upbit = pyupbit.Upbit(access, secret)
-
-print("auto trading start!")
-
 # 시작시간을 위한 함수
 def get_start_time(ticker):
     # get_ohlcv의 2번째 매개변수로 day라는 문자열을 주게 되면 그날의 시작시간이 나오는데 그게 9시로 설정되어있다.(그냥 ticker로 넘겨주게되면 krw-btc의 값이 넘어간다)
-    df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
+    df = pyupbit.get_ohlcv(ticker, interval="day", count=1)
     # df의 값 중 첫번째 즉 인덱스[column]의 첫번째 index[0]의 값이 시간인데 이걸 받아와서 start_time에 저장.
     start_time = df.index[0] + datetime.timedelta(hours=6)
     return start_time
 
 # 매수 목표가를 위한 함수
-def get_target_price(ticker):
+def get_target_price(ticker, k):
     # 하루치의 정보를 df(데이터프레임)에 저장.
     df = pyupbit.get_ohlcv(ticker, interval="day", count=1)
     # df.iloc[0][3]은 .iloc의 위치 인덱싱을 사용해 count=1(하루치의 시가,저가,종가등등)중에 저가를 뽑아준다.
-    low_price = df.iloc[0]['low']
+    low_price = df.iloc[0,2]
     # 목표매수가 설정. 저가*1.02(1.02는 저가의 +2퍼센트를 매수하기 위해 1.02를 곱해준 값을 target_price에 저장)
-    target_price = low_price * 1.02
+    target_price = low_price * k
     return target_price
 
 # 현재가 조회를 위한 함수
@@ -47,6 +42,10 @@ def get_balance(ticker):
                 return 0
     return 0
 
+# 로그인
+upbit = pyupbit.Upbit(access, secret)
+print("auto trading start!")
+
 # 본격 매매시작
 while True:
     try:
@@ -59,7 +58,7 @@ while True:
         
         # 시간이 15:00 ~ 현재 ~ 8:00시가 되면 자동매매를 한다.
         if start_time < now < end_time:
-            target_price = get_target_price("KRW-BTC")
+            target_price = get_target_price("KRW-BTC", 1.02)
             current_price = get_current_price("KRW-BTC")
             # 목표 매수가가 현재가보다 낮을 때 매수
             if target_price < current_price:
