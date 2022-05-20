@@ -1,4 +1,4 @@
-class Graph_list:
+class Graph_Node:
     def __init__(self):
         self.vertex = None
         self.link = None
@@ -12,7 +12,7 @@ class Graph:
         self.node_size += 1
     
     def insert_edge(self, u, v):
-        new_node = Graph_list()
+        new_node = Graph_Node()
         new_node.vertex = v
         new_node.link = self.adj_list[u]
         self.adj_list[u] = new_node
@@ -22,7 +22,7 @@ class Graph:
             p = self.adj_list[i]
             print(f"vertex {i}`s near list", end=" ")
             while p != None:
-                print("-> {0} ".format(p.vertex), end=" ")
+                print("-> {0}".format(p.vertex), end=" ")
                 p = p.link
             print("")
             
