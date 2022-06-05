@@ -25,7 +25,7 @@ station_bfs_graph = {
 
 def bfs(start, end):
     que = deque([[start]])
-    
+    visited = [start]
     while que:
         route = que.popleft()
         node = route[-1]
@@ -34,6 +34,10 @@ def bfs(start, end):
             return route
 
         for i in station_bfs_graph.get(node, []):
+            if i not in visited:
+                visited.append(i)
+            else:
+                continue
             new_route = list(route)
             new_route.append(i)
             que.append(new_route)
