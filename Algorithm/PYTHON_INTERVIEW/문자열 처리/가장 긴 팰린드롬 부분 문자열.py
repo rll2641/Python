@@ -18,4 +18,4 @@ for i in range(len(strs) - 1):
                  expend(i, i+2),
                  key=len)
 
-print(result)
+print(len(result))
