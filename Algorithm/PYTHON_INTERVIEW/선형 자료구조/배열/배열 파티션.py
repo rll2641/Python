@@ -1,21 +1,20 @@
-num_list = [1, 4, 3, 2]
-# 오름차순
-num_list.sort()
-pair = list()
-total = 0
-for n in num_list:
-    pair.append(n)
-    if len(pair) == 2:
-        total += min(pair)
-        pair = list()
+nums = [1,4,3,2]
+nums.sort()
+# 반복
+result, total = [], 0
+for i in nums:
+    result.append(i)
+    if len(result) == 2:
+        total += min(result)
+        result = []
 print(total)
 
-# 짝수번째 값 계산
+# 짝수번째 값
 total = 0
-for index, value in enumerate(num_list):
+for index, num in enumerate(nums):
     if index % 2 == 0:
-        total += value
+        total += num
 print(total)
 
-# 파이썬다운방식
-print(sum(sorted(num_list)[::2]))
+# 파이썬다운 방식
+print(sum(sorted(nums)[::2]))

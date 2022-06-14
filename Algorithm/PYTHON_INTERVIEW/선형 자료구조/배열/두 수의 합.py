@@ -1,33 +1,20 @@
-nums = [2, 4, 7, 11, 15, 5] 
-target = 9
+nums, target = [2, 7, 11, 15], 9
 
-# 브루트 포스
-idx_i = 0
-idx_j = 0
-for i in range(len(nums)):
+# 반복문
+for i in range(len(nums) - 1):
     for j in range(i+1, len(nums)):
         if nums[i] + nums[j] == target:
-            idx_i = i
-            idx_j = j
-
-print(f'[{idx_i}, {idx_j}]')
+            print(f'[{i}, {j}]')
 
 # in
-for i, n in enumerate(nums):
-    complement = target - n
-    
-    if complement in nums[i+1:]:
-        result = [nums.index(n), nums.index(complement)]
-        
-print(result)
+for i in range(len(nums)):
+    num = target - nums[i] 
+    if num in nums[i+1:]:
+        print(f'[{i}, {nums.index(num)}]')
 
-# 딕셔너리 이용해 조회, num -> key, index -> value
-def twoSum(nums, target):
-    nums_map = {}
-
-    for i, num in enumerate(nums):
-        if target - num in nums_map:
-            return [i, nums_map[target - num]]
-        nums_map[num] = i
-
-print(twoSum(nums, target))
+# 딕셔너리
+nums_dic = {}
+for i, num in enumerate(nums):
+    if target - num in nums_dic:
+        print(f'[{nums_dic[target-num]}, {i}]')
+    nums_dic[num] = i

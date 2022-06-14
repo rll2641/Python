@@ -1,16 +1,18 @@
 import sys
 
-num_list = [7, 1, 5, 3, 6, 4]
+nums = [7,1,4,3,6,4]
+max_price = 0
 
-# 저점과 현재 값과의 차이계산
-profit = 0
-min_price = sys.maxsize
+# 브루트 포스
+for index, price in enumerate(nums):
+    for j in range(index, len(nums)):
+        max_price = max(max_price, nums[j] - price)
+        
+print(max_price)
 
-for price in num_list:
-    # 리스트안에서 min값 확인
-    min_price = min(min_price, price)
-    # 현재 profit과 price - min의 값중 뭐가 최대인지 확인하면
-    # O(n^2) 대신 O(n) 가능
-    profit = max(profit, price - min_price)
-
+# 저점과현재값
+min_price, profit = sys.maxsize, 0
+for i in nums:
+    min_price = min(min_price, i)
+    profit = max(profit, i - min_price)
 print(profit)
